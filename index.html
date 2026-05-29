@@ -1,0 +1,2158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Checkmate Mobile Detailing – Southeast MA &amp; Cape Cod</title>
+<meta name="description" content="Professional mobile detailing serving Southeast MA &amp; Cape Cod. We come to your driveway. Book online or call (508) 273-6150.">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=Barlow:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&amp;display=swap" rel="stylesheet">
+<style>
+  :root {
+    --crimson: #8B1A1A;
+    --crimson-light: #b02222;
+    --crimson-glow: rgba(139,26,26,0.15);
+    --silver: #9aa3ad;
+    --silver-light: #c8d0d8;
+    --bg: #0e0e0e;
+    --bg-2: #141414;
+    --bg-3: #1a1a1a;
+    --bg-4: #222222;
+    --border: rgba(255,255,255,0.07);
+    --white: #f2f2f0;
+    --text: #d8d8d4;
+    --text-muted: #7a7a76;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Barlow', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* ─── ANNOUNCEMENT BAR ─── */
+  .announce-bar {
+    background: var(--crimson);
+    color: var(--white);
+    text-align: center;
+    padding: 10px 20px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    position: relative;
+    z-index: 101;
+  }
+  .announce-bar a {
+    color: var(--white);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .announce-bar strong { opacity: 1; }
+  .announce-dot {
+    display: inline-block;
+    width: 6px; height: 6px;
+    background: rgba(255,255,255,0.6);
+    border-radius: 50%;
+    margin: 0 10px;
+    vertical-align: middle;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: sticky;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 48px;
+    background: rgba(14,14,14,0.96);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  nav img { height: 63px; width: auto; margin-top: 3px; }
+
+  .nav-center { display: flex; gap: 32px; align-items: center; }
+
+  .nav-center a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.8rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-center a:hover { color: var(--white); }
+
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .nav-phone {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    transition: color 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+  }
+  .nav-phone:hover { color: var(--white); }
+  .nav-phone::before {
+    content: '📞';
+    font-size: 0.75rem;
+  }
+
+  .nav-cta {
+    background: var(--crimson) !important;
+    color: var(--white) !important;
+    padding: 11px 22px;
+    border-radius: 2px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: background 0.2s;
+    white-space: nowrap;
+  }
+  .nav-cta:hover { background: var(--crimson-light) !important; }
+
+  /* ─── HAMBURGER / MOBILE NAV ─── */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: 40px; height: 40px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 4px;
+    border-radius: 4px;
+    transition: background 0.2s;
+    z-index: 102;
+  }
+  .hamburger:hover { background: rgba(255,255,255,0.06); }
+  .hamburger span {
+    display: block;
+    width: 22px; height: 2px;
+    background: var(--white);
+    border-radius: 2px;
+    transition: transform 0.3s ease, opacity 0.3s ease, width 0.3s ease;
+    transform-origin: center;
+  }
+  .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; width: 0; }
+  .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  /* Mobile nav drawer */
+  .mobile-nav {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    z-index: 99;
+    pointer-events: none;
+  }
+  .mobile-nav-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0);
+    transition: background 0.3s ease;
+  }
+  .mobile-nav-panel {
+    position: absolute;
+    top: 0; right: 0;
+    width: min(320px, 85vw);
+    height: 100%;
+    background: var(--bg-2);
+    border-left: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    padding: 90px 32px 40px;
+    gap: 8px;
+    transform: translateX(100%);
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .mobile-nav.active {
+    pointer-events: all;
+  }
+  .mobile-nav.active .mobile-nav-backdrop {
+    background: rgba(0,0,0,0.7);
+  }
+  .mobile-nav.active .mobile-nav-panel {
+    transform: translateX(0);
+  }
+  .mobile-nav a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+    transition: color 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .mobile-nav a:hover { color: var(--white); }
+  .mobile-nav a::after { content: '→'; opacity: 0.3; font-size: 0.85rem; }
+  .mobile-nav-actions {
+    margin-top: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .mobile-nav-phone {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 14px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    color: var(--white) !important;
+    font-size: 1rem !important;
+    border-bottom: 1px solid var(--border) !important;
+  }
+  .mobile-nav-phone::after { display: none !important; }
+  .mobile-nav-book {
+    display: block;
+    text-align: center;
+    background: var(--crimson);
+    color: var(--white) !important;
+    padding: 16px;
+    border-radius: 2px;
+    font-weight: 800 !important;
+    font-size: 0.9rem !important;
+    letter-spacing: 0.1em;
+    border: none !important;
+    border-bottom: none !important;
+  }
+  .mobile-nav-book::after { display: none !important; }
+  .mobile-nav-book:hover { background: var(--crimson-light); }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 100px 48px 80px;
+    background: var(--bg);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 70% at 70% 50%, rgba(139,26,26,0.1) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 50% at 20% 30%, rgba(139,26,26,0.05) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 60px;
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--crimson-light);
+    font-weight: 700;
+    margin-bottom: 20px;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    width: 28px; height: 2px;
+    background: var(--crimson-light);
+  }
+
+  .hero-headline {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(3.8rem, 6.5vw, 6.8rem);
+    line-height: 0.95;
+    letter-spacing: 0.01em;
+    color: var(--white);
+    margin-bottom: 28px;
+  }
+  .hero-headline .accent { color: var(--crimson-light); display: block; }
+
+  .hero-sub {
+    font-size: 1.05rem;
+    line-height: 1.75;
+    color: var(--text-muted);
+    max-width: 480px;
+    margin-bottom: 42px;
+  }
+  .hero-sub strong { color: var(--text); }
+
+  .hero-actions { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
+
+  .btn-primary {
+    background: var(--crimson);
+    color: var(--white);
+    text-decoration: none;
+    padding: 16px 32px;
+    font-weight: 700;
+    font-size: 0.88rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border-radius: 2px;
+    transition: background 0.2s, transform 0.15s;
+    display: inline-block;
+  }
+  .btn-primary:hover { background: var(--crimson-light); transform: translateY(-2px); }
+
+  .btn-call {
+    background: transparent;
+    color: var(--white);
+    text-decoration: none;
+    padding: 15px 28px;
+    font-weight: 700;
+    font-size: 0.88rem;
+    letter-spacing: 0.06em;
+    border-radius: 2px;
+    border: 1px solid rgba(255,255,255,0.18);
+    transition: border-color 0.2s, background 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .btn-call:hover { border-color: var(--white); background: rgba(255,255,255,0.05); }
+
+  .hero-visual {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .logo-wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+  .logo-wrap::before {
+    content: '';
+    position: absolute;
+    width: 340px; height: 340px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(139,26,26,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .logo-wrap img {
+    width: 300px; height: auto;
+    position: relative; z-index: 1;
+    animation: float 7s ease-in-out infinite;
+    mix-blend-mode: lighten;
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  .hero-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    width: 100%;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .stat {
+    padding: 0 10px;
+    height: 76px;
+    text-align: center;
+    border-right: 1px solid var(--border);
+    background: var(--bg-2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+  }
+  .stat:last-child { border-right: none; }
+  .stat-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.5rem;
+    color: var(--crimson-light);
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 0.63rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    font-weight: 600;
+    line-height: 1.2;
+  }
+
+  /* ─── SECTION BASE ─── */
+  section { padding: 90px 48px; }
+  .section-inner { max-width: 1100px; margin: 0 auto; }
+
+  .section-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.73rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--crimson-light);
+    font-weight: 700;
+    margin-bottom: 14px;
+  }
+  .section-label::before {
+    content: '';
+    width: 20px; height: 2px;
+    background: var(--crimson-light);
+  }
+
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.4rem, 3.8vw, 3.4rem);
+    line-height: 1.05;
+    color: var(--white);
+    margin-bottom: 14px;
+  }
+
+  .section-sub {
+    color: var(--text-muted);
+    font-size: 1rem;
+    line-height: 1.7;
+    max-width: 560px;
+    margin-bottom: 50px;
+  }
+
+  /* ─── REVIEWS ─── */
+  .reviews-section {
+    background: var(--bg-2);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-bottom: 36px;
+  }
+
+  .review-card {
+    background: var(--bg-3);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 28px 26px;
+  }
+
+  .review-stars { font-size: 0.9rem; margin-bottom: 16px; }
+  .review-text { font-size: 0.95rem; line-height: 1.7; color: var(--text-muted); margin-bottom: 20px; }
+  .review-author { font-weight: 700; font-size: 0.88rem; color: var(--white); }
+  .review-location { font-size: 0.8rem; color: var(--text-muted); margin-top: 3px; }
+
+  .reviews-badge {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding-top: 28px;
+    border-top: 1px solid var(--border);
+  }
+
+  .reviews-badge-icon { font-size: 1.6rem; }
+
+  .reviews-badge-text strong {
+    display: block;
+    color: var(--white);
+    font-size: 0.95rem;
+    font-weight: 700;
+  }
+  .reviews-badge-text span {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+  }
+
+  /* ─── WHY US ─── */
+  .why-section { background: var(--bg); }
+
+  .why-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+
+  .why-card {
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 30px 24px;
+    transition: border-color 0.2s;
+  }
+  .why-card:hover { border-color: var(--crimson); }
+
+  .why-icon { font-size: 1.8rem; margin-bottom: 18px; display: block; }
+  .why-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; color: var(--white); margin-bottom: 10px; }
+  .why-text { font-size: 0.91rem; color: var(--text-muted); line-height: 1.65; }
+
+  /* ─── MONTHLY PLANS ─── */
+  .plans-section {
+    background: var(--bg-2);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .plans-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-bottom: 28px;
+  }
+
+  .plan-card {
+    background: var(--bg-3);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .plan-card:hover { border-color: rgba(139,26,26,0.4); transform: translateY(-3px); }
+
+  .plan-card.plan-featured {
+    border-color: var(--crimson);
+    transform: translateY(-6px);
+  }
+  .plan-card.plan-featured:hover { border-color: var(--crimson-light); transform: translateY(-9px); }
+
+  .plan-badge {
+    background: var(--crimson);
+    color: var(--white);
+    text-align: center;
+    padding: 8px;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  .plan-header {
+    padding: 28px 28px 20px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .plan-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.5rem;
+    color: var(--crimson-light);
+    letter-spacing: 0.08em;
+    margin-bottom: 10px;
+  }
+
+  .plan-price {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 3rem;
+    color: var(--white);
+    line-height: 1;
+    display: flex;
+    align-items: flex-start;
+    gap: 2px;
+  }
+  .plan-dollar {
+    font-size: 1.4rem;
+    margin-top: 6px;
+    color: var(--text-muted);
+  }
+  .plan-per {
+    font-family: 'Barlow', sans-serif;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    font-weight: 600;
+    align-self: flex-end;
+    margin-bottom: 6px;
+    margin-left: 2px;
+  }
+
+  .plan-body { padding: 24px 28px 28px; }
+
+  .plan-features {
+    list-style: none;
+    margin-bottom: 22px;
+  }
+  .plan-features li {
+    font-size: 0.91rem;
+    color: var(--text-muted);
+    padding: 7px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .plan-features li:last-child { border-bottom: none; }
+  .plan-features li::before {
+    content: '';
+    width: 5px; height: 5px;
+    background: var(--crimson-light);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .plan-cadence {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    padding: 10px 14px;
+    background: rgba(255,255,255,0.03);
+    border-radius: 4px;
+    border: 1px solid var(--border);
+    text-align: center;
+  }
+
+  .plan-cta {
+    display: block;
+    text-align: center;
+    background: var(--crimson);
+    color: var(--white);
+    text-decoration: none;
+    padding: 14px 24px;
+    border-radius: 2px;
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: background 0.2s;
+  }
+  .plan-cta:hover { background: var(--crimson-light); }
+
+  .plan-featured .plan-cta {
+    background: var(--white);
+    color: var(--bg);
+  }
+  .plan-featured .plan-cta:hover {
+    background: var(--silver-light);
+  }
+
+  .plans-note {
+    text-align: center;
+    font-size: 0.86rem;
+    color: var(--text-muted);
+    max-width: 540px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  /* ─── SERVICES ─── */
+  .services-section { background: var(--bg); }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 30px;
+  }
+
+  .service-card {
+    background: var(--bg-3);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+  .service-card:hover { border-color: rgba(139,26,26,0.4); }
+  .service-card.full-width { grid-column: 1 / -1; max-width: none; }
+
+  .service-header {
+    background: var(--crimson);
+    padding: 26px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .service-header h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.8rem;
+    letter-spacing: 0.04em;
+    color: var(--white);
+  }
+
+  .service-badge {
+    background: rgba(255,255,255,0.15);
+    color: rgba(255,255,255,0.9);
+    padding: 6px 16px;
+    border-radius: 30px;
+    font-size: 0.74rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .service-body { padding: 28px 32px; }
+
+  .service-includes {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px 24px;
+    margin-bottom: 22px;
+  }
+
+  .service-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+  }
+  .service-item::before {
+    content: '';
+    width: 5px; height: 5px;
+    background: var(--crimson-light);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .service-note {
+    font-size: 0.87rem;
+    color: var(--text-muted);
+    font-style: italic;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    line-height: 1.65;
+  }
+
+  .coming-soon-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .coming-soon-card {
+    background: var(--bg-3);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 28px 32px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    opacity: 0.6;
+  }
+
+  .coming-soon-label {
+    display: inline-block;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 30px;
+    margin-bottom: 10px;
+  }
+
+  .coming-soon-card h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.6rem;
+    color: var(--white);
+    margin-bottom: 6px;
+  }
+
+  .coming-soon-card p {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+
+  /* ─── GALLERY / BEFORE-AFTER ─── */
+  .gallery-section {
+    background: var(--bg-2);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* Featured reels row */
+  .gallery-reels {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+
+  .reel-card {
+    position: relative;
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    aspect-ratio: 9/16;
+    background: var(--bg-3);
+    cursor: pointer;
+    display: block;
+    text-decoration: none;
+  }
+  .reel-card img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+  }
+  .reel-card:hover img { transform: scale(1.05); }
+  .reel-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 50%);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 14px;
+    transition: background 0.2s;
+  }
+  .reel-card:hover .reel-overlay { background: linear-gradient(to top, rgba(139,26,26,0.7) 0%, transparent 50%); }
+  .reel-play {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 48px; height: 48px;
+    background: rgba(255,255,255,0.9);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .reel-card:hover .reel-play { background: var(--crimson-light); transform: translate(-50%, -50%) scale(1.1); }
+  .reel-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(4px);
+    color: var(--white);
+    font-size: 0.65rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 5px 10px;
+    border-radius: 30px;
+    align-self: flex-start;
+  }
+  .reel-caption {
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.9);
+    font-weight: 600;
+    line-height: 1.3;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.8);
+  }
+
+  /* Before/After pairs */
+  .ba-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+
+  .ba-pair {
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    background: var(--bg-3);
+  }
+  .ba-labels {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  .ba-label {
+    text-align: center;
+    padding: 9px;
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+  .ba-label.before { background: rgba(255,255,255,0.04); color: var(--text-muted); }
+  .ba-label.after { background: var(--crimson); color: var(--white); }
+  .ba-images {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    background: var(--border);
+  }
+  .ba-images img {
+    width: 100%; height: 200px;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* Photo grid */
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 28px;
+  }
+
+  .gallery-item {
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    aspect-ratio: 1;
+    background: var(--bg-3);
+    position: relative;
+    display: block;
+    text-decoration: none;
+  }
+  .gallery-item img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+  }
+  .gallery-item:hover img { transform: scale(1.05); }
+  .gallery-item-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(139,26,26,0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+    font-size: 1.4rem;
+    opacity: 0;
+  }
+  .gallery-item:hover .gallery-item-overlay { background: rgba(139,26,26,0.4); opacity: 1; }
+
+  .gallery-ig-cta { text-align: center; }
+
+  .btn-ig {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    text-decoration: none;
+    padding: 14px 28px;
+    border-radius: 4px;
+    font-weight: 700;
+    font-size: 0.86rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .btn-ig:hover { border-color: var(--white); color: var(--white); }
+
+  @media (max-width: 900px) {
+    .gallery-reels { grid-template-columns: repeat(2, 1fr); }
+    .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+    .ba-row { grid-template-columns: 1fr; }
+  }
+
+  /* ─── REFERRAL ─── */
+  .referral-section { background: var(--bg); }
+
+  .referral-banner {
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--crimson);
+    border-radius: 6px;
+    padding: 40px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+
+  .referral-left { flex: 1; min-width: 280px; }
+  .referral-tag {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--crimson-light);
+    margin-bottom: 12px;
+  }
+  .referral-headline {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.4rem;
+    color: var(--white);
+    line-height: 1;
+    margin-bottom: 12px;
+  }
+  .referral-sub {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+    max-width: 420px;
+  }
+
+  .referral-right {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    min-width: 220px;
+  }
+
+  .referral-offer {
+    text-align: center;
+    background: var(--bg-3);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 20px 28px;
+  }
+  .referral-offer .offer-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 3rem;
+    color: var(--crimson-light);
+    line-height: 1;
+  }
+  .referral-offer .offer-label {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .btn-referral {
+    background: var(--crimson);
+    color: var(--white);
+    text-decoration: none;
+    padding: 14px 24px;
+    border-radius: 2px;
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-align: center;
+    transition: background 0.2s;
+    display: block;
+  }
+  .btn-referral:hover { background: var(--crimson-light); }
+
+  /* ─── FAQ ─── */
+  .faq-section {
+    background: var(--bg-2);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .faq-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .faq-item {
+    background: var(--bg-3);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 26px 28px;
+    transition: border-color 0.2s;
+    cursor: pointer;
+  }
+  .faq-item:hover { border-color: rgba(139,26,26,0.4); }
+
+  .faq-q {
+    font-weight: 700;
+    font-size: 0.98rem;
+    color: var(--white);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .faq-q::before {
+    content: 'Q';
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1rem;
+    color: var(--crimson-light);
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .faq-a {
+    font-size: 0.91rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+    padding-left: 22px;
+  }
+
+  /* ─── AREA ─── */
+  .area-section { background: var(--bg); }
+
+  .area-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    margin-bottom: 40px;
+  }
+
+  .area-col-title {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--crimson-light);
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .area-col-title::before {
+    content: '';
+    width: 16px; height: 2px;
+    background: var(--crimson-light);
+  }
+
+  .area-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .area-tag {
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    padding: 8px 18px;
+    border-radius: 30px;
+    font-size: 0.84rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .area-tag:hover { border-color: var(--crimson); color: var(--crimson-light); }
+
+  .area-note {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+  }
+  .area-note a { color: var(--crimson-light); text-decoration: none; }
+  .area-note a:hover { text-decoration: underline; }
+
+  /* ─── BOOK / CTA ─── */
+  .book-section {
+    background: var(--crimson);
+    padding: 100px 48px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .book-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 60% 80% at 50% 50%, rgba(255,255,255,0.04) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .book-inner { position: relative; z-index: 1; max-width: 680px; margin: 0 auto; }
+
+  .book-eyebrow {
+    font-size: 0.75rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.65);
+    font-weight: 700;
+    margin-bottom: 18px;
+  }
+
+  .book-headline {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.8rem, 5vw, 4.4rem);
+    color: var(--white);
+    line-height: 1;
+    margin-bottom: 18px;
+  }
+
+  .book-sub {
+    font-size: 1rem;
+    color: rgba(255,255,255,0.75);
+    line-height: 1.7;
+    margin-bottom: 12px;
+  }
+
+  .book-urgency {
+    display: inline-block;
+    background: rgba(0,0,0,0.25);
+    color: rgba(255,255,255,0.85);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 8px 20px;
+    border-radius: 30px;
+    margin-bottom: 36px;
+  }
+  .book-urgency::before { content: '⚠ '; }
+
+  .book-actions {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 28px;
+  }
+
+  .btn-book-main {
+    background: var(--white);
+    color: var(--crimson);
+    text-decoration: none;
+    padding: 18px 40px;
+    border-radius: 2px;
+    font-weight: 800;
+    font-size: 0.92rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: background 0.2s, transform 0.15s;
+    display: inline-block;
+  }
+  .btn-book-main:hover { background: var(--silver-light); transform: translateY(-2px); }
+
+  .btn-book-call {
+    color: rgba(255,255,255,0.85);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.95rem;
+    transition: color 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .btn-book-call:hover { color: var(--white); }
+
+  /* Email capture */
+  .book-capture {
+    border-top: 1px solid rgba(255,255,255,0.15);
+    padding-top: 28px;
+  }
+  .book-capture p {
+    font-size: 0.84rem;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 14px;
+  }
+  .capture-form {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .capture-input {
+    background: rgba(0,0,0,0.25);
+    border: 1px solid rgba(255,255,255,0.25);
+    color: var(--white);
+    padding: 12px 20px;
+    border-radius: 2px;
+    font-size: 0.9rem;
+    font-family: 'Barlow', sans-serif;
+    width: 220px;
+    transition: border-color 0.2s;
+  }
+  .capture-input::placeholder { color: rgba(255,255,255,0.4); }
+  .capture-input:focus { outline: none; border-color: rgba(255,255,255,0.5); }
+  .capture-btn {
+    background: rgba(0,0,0,0.35);
+    border: 1px solid rgba(255,255,255,0.25);
+    color: var(--white);
+    padding: 12px 22px;
+    border-radius: 2px;
+    font-weight: 700;
+    font-size: 0.82rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-family: 'Barlow', sans-serif;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .capture-btn:hover { background: rgba(0,0,0,0.5); border-color: rgba(255,255,255,0.45); }
+
+  .book-fine-print {
+    margin-top: 16px;
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.5);
+  }
+
+  /* Form states */
+  .form-message {
+    display: none;
+    margin-top: 14px;
+    padding: 12px 20px;
+    border-radius: 4px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+  }
+  .form-message.success {
+    background: rgba(255,255,255,0.12);
+    color: var(--white);
+    border: 1px solid rgba(255,255,255,0.3);
+  }
+  .form-message.error {
+    background: rgba(0,0,0,0.25);
+    color: rgba(255,255,255,0.8);
+    border: 1px solid rgba(255,255,255,0.15);
+  }
+  .form-message.show { display: block; }
+  .capture-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--bg);
+    border-top: 1px solid var(--border);
+    padding: 40px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  footer img { height: 50px; width: auto; }
+
+  .footer-center {
+    text-align: center;
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+  }
+  .footer-center a { color: var(--text-muted); text-decoration: none; }
+  .footer-center a:hover { color: var(--white); }
+
+  .footer-right {
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 8px;
+  }
+  .footer-phone {
+    color: var(--white);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1rem;
+    transition: color 0.2s;
+  }
+  .footer-phone:hover { color: var(--crimson-light); }
+  .footer-links {
+    display: flex;
+    gap: 18px;
+  }
+  .footer-links a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--white); }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    nav { padding: 12px 24px; }
+    .nav-center { display: none; }
+    .nav-phone { display: none; }
+    .hamburger { display: flex; }
+    .mobile-nav { display: block; }
+
+    .hero { padding: 90px 24px 60px; }
+    .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+    .hero-visual { order: -1; }
+    .logo-wrap img { width: 200px; }
+    .hero-stats { grid-template-columns: repeat(2, 1fr); }
+
+    section { padding: 60px 24px; }
+
+    .reviews-grid { grid-template-columns: 1fr; }
+    .why-grid { grid-template-columns: 1fr 1fr; }
+    .plans-grid { grid-template-columns: 1fr; }
+    .plan-card.plan-featured { transform: none; }
+    .services-grid { grid-template-columns: 1fr; }
+    .service-card.full-width { grid-column: auto; }
+    .gallery-grid { grid-template-columns: 1fr 1fr; }
+    .faq-grid { grid-template-columns: 1fr; }
+    .area-cols { grid-template-columns: 1fr; gap: 24px; }
+    .referral-banner { flex-direction: column; }
+
+    .book-section { padding: 70px 24px; }
+    footer { padding: 30px 24px; flex-direction: column; align-items: center; text-align: center; }
+    .footer-right { align-items: center; }
+  }
+
+  @media (max-width: 600px) {
+    .hero-headline { font-size: 3.2rem; }
+    .why-grid { grid-template-columns: 1fr; }
+    .gallery-grid { grid-template-columns: 1fr; }
+    .coming-soon-row { grid-template-columns: 1fr; }
+    .service-includes { grid-template-columns: 1fr; }
+    .capture-form { flex-direction: column; align-items: stretch; }
+    .capture-input { width: 100%; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ─── ANNOUNCEMENT BAR ─── -->
+<div class="announce-bar">
+  <strong>Limited spots available this month</strong>
+  <span class="announce-dot"></span>
+  Book early to lock in your date
+  <span class="announce-dot"></span>
+  <a href="tel:5082736150">(508) 273-6150</a>
+</div>
+
+<!-- ─── NAV ─── -->
+<nav>
+  <a href="#"><img src="https://checkmatemobiledetailing.com/logo.png" alt="Checkmate Mobile Detailing" onerror="this.style.display='none'"></a>
+  <div class="nav-center">
+    <a href="#reviews">Reviews</a>
+    <a href="#why">Why Us</a>
+    <a href="#plans">Monthly Plans</a>
+    <a href="#services">Services</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#faq">FAQ</a>
+  </div>
+  <div class="nav-right">
+    <a href="tel:5082736150" class="nav-phone">(508) 273-6150</a>
+    <a href="https://checkmatemobiledetailing.com/book" class="nav-cta">Book Now</a>
+    <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ─── MOBILE NAV DRAWER ─── -->
+<div class="mobile-nav" id="mobileNav" aria-hidden="true">
+  <div class="mobile-nav-backdrop" id="mobileBackdrop"></div>
+  <div class="mobile-nav-panel">
+    <a href="#reviews" class="mobile-nav-link">Reviews</a>
+    <a href="#why" class="mobile-nav-link">Why Us</a>
+    <a href="#plans" class="mobile-nav-link">Monthly Plans</a>
+    <a href="#services" class="mobile-nav-link">Services</a>
+    <a href="#gallery" class="mobile-nav-link">Gallery</a>
+    <a href="#faq" class="mobile-nav-link">FAQ</a>
+    <a href="#area" class="mobile-nav-link">Service Area</a>
+    <div class="mobile-nav-actions">
+      <a href="tel:5082736150" class="mobile-nav-phone">📞 (508) 273-6150</a>
+      <a href="https://checkmatemobiledetailing.com/book" class="mobile-nav-book">Book Now →</a>
+    </div>
+  </div>
+</div>
+
+<!-- ─── HERO ─── -->
+<section class="hero" id="home">
+  <div class="hero-grid">
+    <div class="hero-content">
+      <div class="hero-eyebrow">Mobile Detailing · Southeast MA &amp; Cape Cod</div>
+      <h1 class="hero-headline">
+        Your Car.
+        <span class="accent">Showroom</span>
+        Clean.
+      </h1>
+      <p class="hero-sub">
+        Three years. Hundreds of details. Zero drop-offs.
+        <strong>CheckMate comes to your driveway</strong> and delivers
+        a result you simply can't get at a car wash — guaranteed, every time.
+      </p>
+      <div class="hero-actions">
+        <a href="https://checkmatemobiledetailing.com/book" class="btn-primary">Book Your Detail →</a>
+        <a href="tel:5082736150" class="btn-call">📞 (508) 273-6150</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="logo-wrap">
+        <img src="https://checkmatemobiledetailing.com/logo.png" alt="Checkmate Mobile Detailing Logo">
+      </div>
+      <div class="hero-stats">
+        <div class="stat">
+          <div class="stat-num">5★</div>
+          <div class="stat-label">Avg Rating</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">3+</div>
+          <div class="stat-label">Years Operating</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">24HR</div>
+          <div class="stat-label">Response Time</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">100%</div>
+          <div class="stat-label">Mobile · We Come to You</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── REVIEWS ─── -->
+<section class="reviews-section" id="reviews">
+  <div class="section-inner">
+    <div class="section-label">Customer Reviews</div>
+    <h2 class="section-title">Real Results. Real People.</h2>
+    <p class="section-sub">Here's what customers across Southeast MA and Cape Cod are saying.</p>
+
+    <div class="reviews-grid">
+      <div class="review-card">
+        <div class="review-stars">⭐⭐⭐⭐⭐</div>
+        <p class="review-text">"I've never seen my truck look this clean. They came right to my house and had it done in a few hours. Inside and out was absolutely spotless — like brand new off the lot."</p>
+        <div class="review-author">Mike T.</div>
+        <div class="review-location">Wareham, MA</div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">⭐⭐⭐⭐⭐</div>
+        <p class="review-text">"Hired Checkmate for my wife's SUV before a road trip. The attention to detail was unreal — the guys didn't miss a single spot. Highly recommend to anyone in the area."</p>
+        <div class="review-author">Dan R.</div>
+        <div class="review-location">Marion, MA</div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">⭐⭐⭐⭐⭐</div>
+        <p class="review-text">"My car had years of grime and pet hair. I thought it was a lost cause. Checkmate brought it back to life — I couldn't believe it was the same car. Will be using them again."</p>
+        <div class="review-author">Sarah L.</div>
+        <div class="review-location">Sandwich, MA</div>
+      </div>
+    </div>
+
+    <div class="reviews-badge">
+      <div class="reviews-badge-icon">🏅</div>
+      <div class="reviews-badge-text">
+        <strong>Google · 5.0 Stars</strong>
+        <span>Southeast MA &amp; Cape Cod · Verified Reviews</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── WHY US ─── -->
+<section class="why-section" id="why">
+  <div class="section-inner">
+    <div class="section-label">Why Checkmate</div>
+    <h2 class="section-title">We Don't Do Half-Measures.</h2>
+    <p class="section-sub">One standard: the best. No tiers, no shortcuts, no "good enough." Every job gets everything we've got.</p>
+
+    <div class="why-grid">
+      <div class="why-card">
+        <span class="why-icon">🏠</span>
+        <div class="why-title">We Come To You</div>
+        <p class="why-text">No driving, no drop-offs, no waiting rooms. We show up wherever your car is and handle everything on-site — driveway, parking lot, wherever.</p>
+      </div>
+      <div class="why-card">
+        <span class="why-icon">🏆</span>
+        <div class="why-title">One Standard: The Best</div>
+        <p class="why-text">We don't offer basic packages because we don't do basic work. Every detail is a full detail — inside, outside, top to bottom, no exceptions.</p>
+      </div>
+      <div class="why-card">
+        <span class="why-icon">🧽</span>
+        <div class="why-title">Obsessive Attention</div>
+        <p class="why-text">Every vent, seam, and surface. The standard isn't "clean enough" — it's as clean as physically possible. We obsess so you don't have to.</p>
+      </div>
+      <div class="why-card">
+        <span class="why-icon">📍</span>
+        <div class="why-title">Locally Owned</div>
+        <p class="why-text">We're not a franchise. We're your neighbors in Southeast MA and Cape Cod — and we take that seriously. Your reputation is ours too.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── MONTHLY PLANS ─── -->
+<section class="plans-section" id="plans">
+  <div class="section-inner">
+    <div class="section-label">Monthly Protection Plans</div>
+    <h2 class="section-title">Keep It Clean.<br>Every Month.</h2>
+    <p class="section-sub">Most people detail once a year and wonder why their car always looks dirty. Our monthly subscribers never drive a dirty car — for less than you'd expect.</p>
+
+    <div class="plans-grid">
+
+      <!-- Basic -->
+      <div class="plan-card">
+        <div class="plan-header">
+          <div class="plan-name">Basic</div>
+          <div class="plan-price">
+            <span class="plan-dollar">$</span>99<span class="plan-per">/mo</span>
+          </div>
+        </div>
+        <div class="plan-body">
+          <ul class="plan-features">
+            <li>Exterior hand wash</li>
+            <li>Wheel &amp; tire clean</li>
+            <li>Interior vacuum</li>
+            <li>Streak-free windows</li>
+            <li>Door jamb wipe-down</li>
+          </ul>
+          <div class="plan-cadence">Monthly · We come to you</div>
+          <a href="tel:5082736150" class="plan-cta">Call to Enroll</a>
+        </div>
+      </div>
+
+      <!-- Standard - Featured -->
+      <div class="plan-card plan-featured">
+        <div class="plan-badge">Most Popular</div>
+        <div class="plan-header">
+          <div class="plan-name">Standard</div>
+          <div class="plan-price">
+            <span class="plan-dollar">$</span>149<span class="plan-per">/mo</span>
+          </div>
+        </div>
+        <div class="plan-body">
+          <ul class="plan-features">
+            <li>Full interior + exterior detail</li>
+            <li>Wheel &amp; tire clean + dressing</li>
+            <li>Carpet treatment</li>
+            <li>Complete wipe-down (nooks included)</li>
+            <li>Streak-free glass finish</li>
+            <li>Ceramic spray finish</li>
+          </ul>
+          <div class="plan-cadence">Monthly · We come to you</div>
+          <a href="tel:5082736150" class="plan-cta">Call to Enroll</a>
+        </div>
+      </div>
+
+      <!-- Premium -->
+      <div class="plan-card">
+        <div class="plan-header">
+          <div class="plan-name">Premium</div>
+          <div class="plan-price">
+            <span class="plan-dollar">$</span>249<span class="plan-per">/mo</span>
+          </div>
+        </div>
+        <div class="plan-body">
+          <ul class="plan-features">
+            <li>Full deep detail — every surface</li>
+            <li>Steam clean &amp; stain removal</li>
+            <li>Decontamination treatment</li>
+            <li>Trim dressing + ceramic seal</li>
+            <li>Pet hair removal</li>
+            <li>Priority scheduling</li>
+          </ul>
+          <div class="plan-cadence">Every 6 weeks · We come to you</div>
+          <a href="tel:5082736150" class="plan-cta">Call to Enroll</a>
+        </div>
+      </div>
+
+    </div>
+
+    <p class="plans-note">
+      Month-to-month — no contracts, no commitments. Cancel anytime.<br>
+      <strong style="color: var(--text);">Founding member pricing is locked for life</strong> — sign up now and never pay more as we grow.
+    </p>
+  </div>
+</section>
+
+<!-- ─── SERVICES ─── -->
+<section class="services-section" id="services">
+  <div class="section-inner">
+    <div class="section-label">Services</div>
+    <h2 class="section-title">Service, Done Right.</h2>
+    <p class="section-sub">One standard across every job — interior and exterior. No shortcuts, just the best we can give.</p>
+
+    <div class="services-grid">
+
+      <!-- Full Detail - spans full width -->
+      <div class="service-card full-width">
+        <div class="service-header">
+          <h3>Full Mobile Detail</h3>
+          <span class="service-badge">Starting at $200</span>
+        </div>
+        <div class="service-body">
+          <div class="service-includes">
+            <div class="service-item">Prewash &amp; contact wash</div>
+            <div class="service-item">Steam clean &amp; stain removal</div>
+            <div class="service-item">Decontamination</div>
+            <div class="service-item">Streak-free glass finish</div>
+            <div class="service-item">Wheel &amp; tire cleaning + dressing</div>
+            <div class="service-item">Carpet treatment</div>
+            <div class="service-item">Ceramic spray finish</div>
+            <div class="service-item">Complete wipe-down (nooks &amp; crannies)</div>
+            <div class="service-item">Door jambs</div>
+            <div class="service-item">Vacuum, air compress &amp; drill brush</div>
+          </div>
+          <p class="service-note">Pricing is based on an hourly rate — vehicle size, pet hair, and condition all factor in. We'll give you a straight quote before we start. No hidden fees, no surprises.</p>
+        </div>
+      </div>
+
+      <!-- Trim Restoration -->
+      <div class="service-card">
+        <div class="service-header">
+          <h3>Trim Restoration</h3>
+          <span class="service-badge">Starting at $75</span>
+        </div>
+        <div class="service-body">
+          <div class="service-includes">
+            <div class="service-item">Deep clean &amp; decontamination</div>
+            <div class="service-item">All black trim restored</div>
+            <div class="service-item">Long-lasting color dye</div>
+            <div class="service-item">UV-protected ceramic seal</div>
+          </div>
+          <p class="service-note">Results last 1–3 years. Price varies by trim amount and condition — we'll quote before we start.</p>
+        </div>
+      </div>
+
+      <!-- Headlight Restoration -->
+      <div class="service-card">
+        <div class="service-header">
+          <h3>Headlight Restoration</h3>
+          <span class="service-badge">Starting at $75</span>
+        </div>
+        <div class="service-body">
+          <div class="service-includes">
+            <div class="service-item">Multi-stage wet sanding</div>
+            <div class="service-item">Restores clarity &amp; brightness</div>
+            <div class="service-item">Professional polish &amp; buff</div>
+            <div class="service-item">Prevents future oxidation</div>
+            <div class="service-item">Ceramic UV sealant</div>
+          </div>
+          <p class="service-note">Severely oxidized headlights may require additional time and will be quoted accordingly. Results that last — not a kit from a shelf.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Coming Soon -->
+    <div class="coming-soon-row">
+      <div class="coming-soon-card">
+        <div>
+          <div class="coming-soon-label">Coming Soon</div>
+          <h3>Paint Correction</h3>
+          <p>Professional paint correction to remove swirl marks, scratches, and oxidation. Interested? Reach out now.</p>
+        </div>
+      </div>
+      <div class="coming-soon-card">
+        <div>
+          <div class="coming-soon-label">Coming Soon</div>
+          <h3>Ceramic Coating</h3>
+          <p>Long-lasting ceramic protection for your paint. Get on the waitlist — <a href="tel:5082736150" style="color:var(--crimson-light); text-decoration:none;">call us</a> to be first.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ─── GALLERY ─── -->
+<section class="gallery-section" id="gallery">
+  <div class="section-inner">
+    <div class="section-label">Before &amp; After</div>
+    <h2 class="section-title">See The Difference.</h2>
+    <p class="section-sub">Every result below was done in someone's driveway. No shop. No staging. Just CheckMate showing up and doing the work.</p>
+
+    <!-- Featured Reels Row -->
+    <div class="gallery-reels">
+
+      <a class="reel-card" href="https://www.instagram.com/checkmatemobiledetailing/reel/DYruAnDx_xV/" target="_blank" rel="noopener">
+        <img src="assets/gallery/03-car-wash-vs.jpg" alt="Car Wash vs Professional Detail">
+        <div class="reel-overlay">
+          <span class="reel-badge">▶ Reel</span>
+          <div class="reel-play">▶</div>
+          <div class="reel-caption">Car Wash vs. Professional Detail — Part 1</div>
+        </div>
+      </a>
+
+      <a class="reel-card" href="https://www.instagram.com/checkmatemobiledetailing/reel/DYyGZJjpHam/" target="_blank" rel="noopener">
+        <img src="assets/gallery/02-dirty-car.jpg" alt="We can clean anything">
+        <div class="reel-overlay">
+          <span class="reel-badge">▶ Reel</span>
+          <div class="reel-play">▶</div>
+          <div class="reel-caption">We Can Clean Anything</div>
+        </div>
+      </a>
+
+      <a class="reel-card" href="https://www.instagram.com/checkmatemobiledetailing/reel/DY5PlBpJeID/" target="_blank" rel="noopener">
+        <img src="assets/gallery/01-prewash.jpg" alt="Prewash process reel">
+        <div class="reel-overlay">
+          <span class="reel-badge">▶ Reel</span>
+          <div class="reel-play">▶</div>
+          <div class="reel-caption">Live in Southeast MA or Cape Cod? Give Us a Call</div>
+        </div>
+      </a>
+
+    </div>
+
+    <!-- Before / After Comparisons -->
+    <div class="ba-row">
+
+      <div class="ba-pair">
+        <div class="ba-labels">
+          <div class="ba-label before">Before</div>
+          <div class="ba-label after">After ✨</div>
+        </div>
+        <div class="ba-images">
+          <img src="assets/gallery/02-dirty-car.jpg" alt="Before — heavily soiled interior">
+          <img src="assets/gallery/09-foam-after.jpg" alt="After — spotless result">
+        </div>
+      </div>
+
+      <div class="ba-pair">
+        <div class="ba-labels">
+          <div class="ba-label before">Before</div>
+          <div class="ba-label after">After ✨</div>
+        </div>
+        <div class="ba-images">
+          <img src="assets/gallery/05-before-detail.jpg" alt="Before detail">
+          <img src="assets/gallery/07-audi-after.jpg" alt="After — Audi detail complete">
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Photo Grid -->
+    <div class="gallery-grid">
+
+      <a class="gallery-item" href="https://www.instagram.com/checkmatemobiledetailing/reel/DW1KETDka8S/" target="_blank" rel="noopener">
+        <img src="assets/gallery/09-foam-after.jpg" alt="After results — foam cannon detail">
+        <div class="gallery-item-overlay">↗</div>
+      </a>
+
+      <a class="gallery-item" href="https://www.instagram.com/checkmatemobiledetailing/reel/DYV4q4_trkO/" target="_blank" rel="noopener">
+        <img src="assets/gallery/07-audi-after.jpg" alt="Audi — Make the right move">
+        <div class="gallery-item-overlay">↗</div>
+      </a>
+
+      <a class="gallery-item" href="https://www.instagram.com/checkmatemobiledetailing/reel/DXR5AFPEZZ5/" target="_blank" rel="noopener">
+        <img src="assets/gallery/08-audi-german.jpg" alt="Audi detail — premium result">
+        <div class="gallery-item-overlay">↗</div>
+      </a>
+
+      <a class="gallery-item" href="https://www.instagram.com/checkmatemobiledetailing/reel/DYV9qe0tYVi/" target="_blank" rel="noopener">
+        <img src="assets/gallery/06-ceramic.jpg" alt="Ceramic coating — key to perfection">
+        <div class="gallery-item-overlay">↗</div>
+      </a>
+
+      <a class="gallery-item" href="https://www.instagram.com/checkmatemobiledetailing/p/DYf-V5HJjPB/" target="_blank" rel="noopener">
+        <img src="assets/gallery/04-detail-work.jpg" alt="Detail work in progress">
+        <div class="gallery-item-overlay">↗</div>
+      </a>
+
+      <a class="gallery-item" href="https://www.instagram.com/checkmatemobiledetailing/reel/DW0HRHzDY8j/" target="_blank" rel="noopener">
+        <img src="assets/gallery/10-foam-cannon.jpg" alt="Professional foam cannon setup">
+        <div class="gallery-item-overlay">↗</div>
+      </a>
+
+      <a class="gallery-item" href="https://www.instagram.com/checkmatemobiledetailing/reel/DWuF4ZoiXdm/" target="_blank" rel="noopener">
+        <img src="assets/gallery/11-equipment.jpg" alt="Professional equipment">
+        <div class="gallery-item-overlay">↗</div>
+      </a>
+
+      <a class="gallery-item" href="https://www.instagram.com/checkmatemobiledetailing/reel/DWP4u_bCSvK/" target="_blank" rel="noopener">
+        <img src="assets/gallery/12-spring-cleaning.jpg" alt="Spring cleaning detail">
+        <div class="gallery-item-overlay">↗</div>
+      </a>
+
+    </div>
+
+    <div class="gallery-ig-cta">
+      <a href="https://www.instagram.com/checkmatemobiledetailing/" target="_blank" rel="noopener" class="btn-ig">
+        📸 Follow Us on Instagram @checkmatemobiledetailing
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── REFERRAL ─── -->
+<section class="referral-section" id="referral">
+  <div class="section-inner">
+    <div class="referral-banner">
+      <div class="referral-left">
+        <div class="referral-tag">Referral Program</div>
+        <h2 class="referral-headline">Refer a Friend.<br>Ride Free.</h2>
+        <p class="referral-sub">
+          Know someone with a dirty car? Send them our way. When they book their first detail,
+          <strong style="color:var(--white);">you get $25 off your next service</strong> — automatically.
+          No codes, no gimmicks. Just call us and let us know who sent you.
+        </p>
+      </div>
+      <div class="referral-right">
+        <div class="referral-offer">
+          <div class="offer-num">$25</div>
+          <div class="offer-label">Off Your Next Detail</div>
+        </div>
+        <a href="tel:5082736150" class="btn-referral">Call to Refer a Friend</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FAQ ─── -->
+<section class="faq-section" id="faq">
+  <div class="section-inner">
+    <div class="section-label">FAQ</div>
+    <h2 class="section-title">Got Questions?</h2>
+    <p class="section-sub">Everything you want to know before you book.</p>
+
+    <div class="faq-grid">
+      <div class="faq-item">
+        <div class="faq-q">How does booking work?</div>
+        <p class="faq-a">Pick your date and time online or give us a call. We'll confirm your location, give you a quote, and show up ready to work. No drop-off, no waiting — we come to you.</p>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">How long does a detail take?</div>
+        <p class="faq-a">A full interior and exterior detail typically takes 3–5 hours depending on vehicle size, condition, and pet hair. We don't rush — we stay until it's done right.</p>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">What if I'm not happy with the result?</div>
+        <p class="faq-a">We don't leave until you're satisfied. If something isn't right, we fix it on the spot — no questions asked. Your car should look like we just described it or we're not done.</p>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Do you work in bad weather?</div>
+        <p class="faq-a">Rain affects the exterior process. If weather is a problem, we'll reach out to reschedule at no cost. Interior-only services can usually proceed regardless of weather.</p>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">How do monthly plans work?</div>
+        <p class="faq-a">We schedule a recurring appointment that works for you — monthly or every 6 weeks. You'll get a reminder before each visit. Cancel anytime with no fees or penalties.</p>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">What areas do you cover?</div>
+        <p class="faq-a">We serve all of Southeast Massachusetts and Cape Cod — from New Bedford up to Taunton, Plymouth, and across the Cape. Not sure if we reach you? Just call us.</p>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Do you detail trucks and SUVs?</div>
+        <p class="faq-a">Yes. We detail everything from compact cars to full-size trucks, SUVs, and vans. Larger vehicles are quoted based on size — we'll give you a straight number before we start.</p>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">What do you need from me?</div>
+        <p class="faq-a">Access to your vehicle and a water source if possible (a garden hose works). We bring all our own equipment and products. Just unlock the car and let us handle the rest.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── SERVICE AREA ─── -->
+<section class="area-section" id="area">
+  <div class="section-inner">
+    <div class="section-label">Service Area</div>
+    <h2 class="section-title">Southeast MA &amp;<br>Cape Cod</h2>
+    <p class="section-sub">We come to you — from the South Shore down to the Cape. Not sure if we cover your area? Just ask.</p>
+
+    <div class="area-cols">
+      <div>
+        <div class="area-col-title">Home Turf</div>
+        <div class="area-tags">
+          <span class="area-tag">Marion</span>
+          <span class="area-tag">Rochester</span>
+          <span class="area-tag">Wareham</span>
+          <span class="area-tag">Mattapoisett</span>
+          <span class="area-tag">Fairhaven</span>
+          <span class="area-tag">Acushnet</span>
+          <span class="area-tag">New Bedford</span>
+          <span class="area-tag">Middleborough</span>
+          <span class="area-tag">Carver</span>
+          <span class="area-tag">Lakeville</span>
+          <span class="area-tag">Freetown</span>
+        </div>
+      </div>
+      <div>
+        <div class="area-col-title">We Also Cover</div>
+        <div class="area-tags">
+          <span class="area-tag">Taunton</span>
+          <span class="area-tag">Fall River</span>
+          <span class="area-tag">Plymouth</span>
+          <span class="area-tag">Bourne</span>
+          <span class="area-tag">Sandwich</span>
+          <span class="area-tag">Barnstable</span>
+          <span class="area-tag">Hyannis</span>
+          <span class="area-tag">Falmouth</span>
+          <span class="area-tag">Mashpee</span>
+          <span class="area-tag">Dennis</span>
+          <span class="area-tag">Yarmouth</span>
+          <span class="area-tag">+ More</span>
+        </div>
+      </div>
+    </div>
+
+    <p class="area-note">Not sure if we reach your town? <a href="tel:5082736150">Call us at (508) 273-6150</a> — if it's drivable, we'll get there.</p>
+  </div>
+</section>
+
+<!-- ─── BOOK CTA ─── -->
+<section class="book-section" id="book">
+  <div class="book-inner">
+    <div class="book-eyebrow">Ready When You Are</div>
+    <h2 class="book-headline">Book Your Detail Today</h2>
+    <p class="book-sub">
+      Pick your date, fill out a few quick details, and we'll handle the rest.
+      Straight quote before we start. No hidden fees. No surprises.
+    </p>
+    <div class="book-urgency">Limited spots available — book now to secure your date</div>
+
+    <div class="book-actions">
+      <a href="https://checkmatemobiledetailing.com/book" class="btn-book-main">Book Online Now →</a>
+      <a href="tel:5082736150" class="btn-book-call">or call (508) 273-6150</a>
+    </div>
+
+    <div class="book-capture">
+      <p>Get appointment reminders and exclusive subscriber offers — drop your info below.</p>
+      <form class="capture-form" id="leadForm">
+        <input type="text" class="capture-input" id="leadName" name="name" placeholder="Your name" required autocomplete="name">
+        <input type="tel" class="capture-input" id="leadPhone" name="phone" placeholder="Phone number" required autocomplete="tel">
+        <button type="submit" class="capture-btn" id="leadSubmit">Stay in Touch</button>
+      </form>
+      <div class="form-message" id="formMsg"></div>
+      <p class="book-fine-print">Southeast MA &amp; Cape Cod only · No spam, ever · We'll reach out to confirm your area</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <img src="https://checkmatemobiledetailing.com/logo.png" alt="Checkmate Mobile Detailing" onerror="this.style.display='none'">
+
+  <div class="footer-center">
+    Checkmate Mobile Detailing · Southeast Massachusetts &amp; Cape Cod<br>
+    <a href="mailto:checkmatemobiledetailing@gmail.com">checkmatemobiledetailing@gmail.com</a>
+    &nbsp;·&nbsp;
+    <a href="https://www.instagram.com/checkmatemobiledetailing/" target="_blank">Instagram</a>
+    <br>
+    © 2025 Checkmate Mobile Detailing. All rights reserved.
+  </div>
+
+  <div class="footer-right">
+    <a href="tel:5082736150" class="footer-phone">(508) 273-6150</a>
+    <div class="footer-links">
+      <a href="#plans">Monthly Plans</a>
+      <a href="#services">Services</a>
+      <a href="https://checkmatemobiledetailing.com/book">Book Now</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ─── HAMBURGER MENU ─── */
+(function() {
+  const btn    = document.getElementById('hamburger');
+  const nav    = document.getElementById('mobileNav');
+  const back   = document.getElementById('mobileBackdrop');
+  const links  = nav.querySelectorAll('.mobile-nav-link, .mobile-nav-phone, .mobile-nav-book');
+
+  function open() {
+    btn.classList.add('open');
+    btn.setAttribute('aria-expanded', 'true');
+    nav.classList.add('active');
+    nav.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function close() {
+    btn.classList.remove('open');
+    btn.setAttribute('aria-expanded', 'false');
+    nav.classList.remove('active');
+    nav.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  btn.addEventListener('click', () => btn.classList.contains('open') ? close() : open());
+  back.addEventListener('click', close);
+  links.forEach(l => l.addEventListener('click', close));
+
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
+})();
+
+/* ─── LEAD CAPTURE FORM ─── */
+(function() {
+  const form   = document.getElementById('leadForm');
+  const msg    = document.getElementById('formMsg');
+  const submitBtn = document.getElementById('leadSubmit');
+
+  // ── Replace with your Formspree endpoint ──────────────────────────────────
+  // 1. Go to https://formspree.io → New Form → copy your endpoint URL
+  // 2. Paste it below, replacing the placeholder
+  // Example: 'https://formspree.io/f/xpzgqkjd'
+  const FORMSPREE_URL = 'https://formspree.io/f/YOUR_FORM_ID';
+  // ──────────────────────────────────────────────────────────────────────────
+
+  function showMsg(text, type) {
+    msg.textContent = text;
+    msg.className = 'form-message show ' + type;
+  }
+
+  form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    const name  = document.getElementById('leadName').value.trim();
+    const phone = document.getElementById('leadPhone').value.trim();
+
+    if (!name) { showMsg('Please enter your name.', 'error'); return; }
+    if (!phone) { showMsg('Please enter your phone number.', 'error'); return; }
+
+    // Optimistic fallback: if Formspree isn't set up yet, still capture locally
+    const isPlaceholder = FORMSPREE_URL.includes('YOUR_FORM_ID');
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending…';
+
+    if (isPlaceholder) {
+      // Dev mode: log to console, show success
+      console.log('Lead captured (Formspree not yet configured):', { name, phone });
+      setTimeout(() => {
+        showMsg('✓ Got it! We\'ll reach out to ' + name + ' soon.', 'success');
+        form.reset();
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Stay in Touch';
+      }, 600);
+      return;
+    }
+
+    try {
+      const res = await fetch(FORMSPREE_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({ name, phone, _subject: 'New CheckMate Lead: ' + name })
+      });
+
+      if (res.ok) {
+        showMsg('✓ Got it, ' + name + '! We\'ll be in touch soon.', 'success');
+        form.reset();
+      } else {
+        const data = await res.json();
+        showMsg(data.error || 'Something went wrong. Call us at (508) 273-6150.', 'error');
+      }
+    } catch (err) {
+      showMsg('Connection error. Call us directly at (508) 273-6150.', 'error');
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Stay in Touch';
+    }
+  });
+})();
+</script>
+</body>
+</html>
