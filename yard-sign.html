@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CheckMate Yard Sign — 18" × 24" Print Ready</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #111;
+      font-family: 'Barlow', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 48px 24px 80px;
+      gap: 60px;
+      min-height: 100vh;
+    }
+
+    .page-header {
+      text-align: center;
+      color: #555;
+      font-size: 12px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+    .page-header strong {
+      color: #f2f2f0;
+      font-size: 15px;
+      display: block;
+      margin-bottom: 5px;
+      letter-spacing: 4px;
+    }
+
+    .sign-label {
+      color: #444;
+      font-size: 10px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      text-align: center;
+      margin-bottom: -50px;
+    }
+
+    /*
+      Physical: 18" wide × 24" tall (standard coroplast yard sign)
+      Screen preview: 540px × 720px (30px/in)
+      Print at 300 DPI: 5400 × 7200 px
+    */
+    .sign {
+      width: 540px;
+      height: 720px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.8), 0 0 0 1px #333;
+    }
+
+    /* ════ VERSION 1: DARK — "Neighborhood Hook" ════ */
+    .sign-dark {
+      background: #0a0a0a;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .dark-top {
+      background: #8B1A1A;
+      padding: 22px 36px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-shrink: 0;
+    }
+    .dark-top-left {
+      display: flex;
+      flex-direction: column;
+    }
+    .dark-eyebrow {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 2px;
+    }
+    .dark-brand {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 72px;
+      color: #fff;
+      letter-spacing: 3px;
+      line-height: 0.85;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.4);
+    }
+    .dark-sub {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+      margin-top: 4px;
+    }
+
+    /* Chess knight on header right */
+    .knight-badge {
+      width: 80px;
+      height: 80px;
+      background: rgba(0,0,0,0.2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 44px;
+      flex-shrink: 0;
+      border: 2px solid rgba(255,255,255,0.1);
+    }
+
+    .dark-body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 28px 36px 0;
+    }
+
+    .dark-hook {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 54px;
+      color: #f2f2f0;
+      text-align: center;
+      letter-spacing: 2px;
+      line-height: 0.95;
+      margin-bottom: 6px;
+    }
+    .dark-hook em { color: #8B1A1A; font-style: normal; }
+
+    .dark-hook-sub {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #444;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .divider {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    .divider-line { flex: 1; height: 1px; background: #222; }
+    .divider-dot { width: 6px; height: 6px; border-radius: 50%; background: #8B1A1A; flex-shrink: 0; }
+
+    /* Phone — the hero element on a yard sign */
+    .big-phone {
+      width: 100%;
+      background: #8B1A1A;
+      border-radius: 6px;
+      padding: 16px 20px 14px;
+      text-align: center;
+      margin-bottom: 18px;
+    }
+    .big-phone-lbl {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 2px;
+    }
+    .big-phone-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 72px;
+      color: #fff;
+      letter-spacing: 5px;
+      line-height: 1;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.4);
+    }
+
+    .bottom-row {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      margin-bottom: 0;
+    }
+    .qr-box {
+      width: 80px;
+      height: 80px;
+      background: #fff;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+    .bottom-info { flex: 1; }
+    .bottom-cta {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 26px;
+      color: #f2f2f0;
+      letter-spacing: 2px;
+      line-height: 1;
+      margin-bottom: 3px;
+    }
+    .bottom-url {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      color: #555;
+    }
+    .bottom-stars {
+      font-size: 12px;
+      color: #FFB800;
+      letter-spacing: 2px;
+      margin-top: 4px;
+    }
+
+    .dark-footer {
+      width: 100%;
+      background: #8B1A1A;
+      padding: 10px 36px 9px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: auto;
+    }
+    .dark-footer-txt {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+    }
+    .dark-footer-brand {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 16px;
+      color: rgba(255,255,255,0.85);
+      letter-spacing: 2px;
+    }
+
+    /* ════ VERSION 2: CRIMSON — "Offer" ════ */
+    .sign-crimson {
+      background: #8B1A1A;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+    }
+    .sign-crimson::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(-45deg, transparent, transparent 24px, rgba(0,0,0,0.07) 24px, rgba(0,0,0,0.07) 26px);
+      pointer-events: none;
+    }
+
+    .crimson-inner {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 32px 36px 0;
+    }
+
+    .crim-eyebrow {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 6px;
+    }
+
+    .crim-brand {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 80px;
+      color: #fff;
+      letter-spacing: 4px;
+      line-height: 0.85;
+      text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      text-align: center;
+      margin-bottom: 4px;
+    }
+    .crim-sub {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 20px;
+    }
+
+    .crim-offer {
+      width: 100%;
+      background: rgba(0,0,0,0.2);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 6px;
+      padding: 20px 24px;
+      text-align: center;
+      margin-bottom: 22px;
+    }
+    .crim-offer-tag {
+      display: inline-block;
+      background: #fff;
+      color: #8B1A1A;
+      font-weight: 900;
+      font-size: 9px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 2px;
+      margin-bottom: 8px;
+    }
+    .crim-offer-head {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 52px;
+      color: #fff;
+      letter-spacing: 2px;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .crim-offer-detail {
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+    }
+
+    .crim-services {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 22px;
+    }
+    .crim-svc {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .crim-svc-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 22px;
+      color: #fff;
+      letter-spacing: 2px;
+    }
+    .crim-svc-price {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.55);
+    }
+    .crim-svc-divider {
+      height: 1px;
+      background: rgba(255,255,255,0.1);
+      flex: 1;
+      margin: 0 10px;
+    }
+
+    .crim-phone {
+      width: 100%;
+      background: rgba(0,0,0,0.25);
+      border-radius: 4px;
+      padding: 16px 20px 14px;
+      text-align: center;
+    }
+    .crim-phone-lbl {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 2px;
+    }
+    .crim-phone-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 62px;
+      color: #fff;
+      letter-spacing: 4px;
+      line-height: 1;
+    }
+
+    .crim-footer {
+      width: 100%;
+      background: rgba(0,0,0,0.25);
+      padding: 10px 36px 9px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: auto;
+    }
+    .crim-footer-txt {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+    }
+
+    /* ─── PRINT NOTES ─── */
+    .print-notes {
+      max-width: 560px;
+      padding: 24px;
+      border: 1px solid #222;
+      border-radius: 8px;
+      color: #555;
+    }
+    .print-notes h3 {
+      color: #8B1A1A;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 20px;
+      letter-spacing: 2px;
+      margin-bottom: 12px;
+    }
+    .print-notes ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .print-notes li { font-size: 13px; line-height: 1.5; display: flex; gap: 8px; }
+    .print-notes li::before { content: '→'; color: #8B1A1A; flex-shrink: 0; }
+    .print-notes li strong { color: #f2f2f0; }
+  </style>
+</head>
+<body>
+
+  <div class="page-header">
+    <strong>CHECKMATE MOBILE DETAILING</strong>
+    Yard Signs — 18″ × 24″ · Two Versions · Pick One (or Both)
+  </div>
+
+  <!-- ═══ VERSION 1: DARK ═══════════════════════════════════ -->
+  <div class="sign-label">◀ VERSION 1 — Dark / Neighborhood Hook ▶</div>
+
+  <div class="sign sign-dark">
+    <div class="dark-top">
+      <div class="dark-top-left">
+        <div class="dark-eyebrow">SE Massachusetts</div>
+        <div class="dark-brand">CHECKMATE</div>
+        <div class="dark-sub">Mobile Detailing</div>
+      </div>
+      <div class="knight-badge">♞</div>
+    </div>
+
+    <div class="dark-body">
+      <div class="dark-hook">WE'RE DETAILING<br>YOUR <em>NEIGHBORHOOD</em></div>
+      <div class="dark-hook-sub">Ask about same-week availability</div>
+
+      <div class="divider">
+        <div class="divider-line"></div>
+        <div class="divider-dot"></div>
+        <div class="divider-line"></div>
+      </div>
+
+      <div class="big-phone">
+        <div class="big-phone-lbl">Call or Text to Book</div>
+        <div class="big-phone-num">(508) 273-6150</div>
+      </div>
+
+      <div class="bottom-row">
+        <div class="qr-box" id="qr-dark"></div>
+        <div class="bottom-info">
+          <div class="bottom-cta">SCAN TO BOOK ONLINE</div>
+          <div class="bottom-url">checkmatemobiledetailing.com</div>
+          <div class="bottom-stars">★★★★★</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="dark-footer">
+      <div class="dark-footer-txt">Fully Mobile · We Come To You</div>
+      <div class="dark-footer-brand">CHECKMATE ♟</div>
+      <div class="dark-footer-txt">100% Satisfaction</div>
+    </div>
+  </div>
+
+  <!-- ═══ VERSION 2: CRIMSON ════════════════════════════════ -->
+  <div class="sign-label">◀ VERSION 2 — Crimson / Offer ▶</div>
+
+  <div class="sign sign-crimson">
+    <div class="crimson-inner">
+      <div class="crim-eyebrow">Mobile Detailing · SE Massachusetts</div>
+      <div class="crim-brand">CHECKMATE</div>
+      <div class="crim-sub">Mobile Detailing</div>
+
+      <div class="crim-offer">
+        <div class="crim-offer-tag">Neighbor Special</div>
+        <div class="crim-offer-head">$25 OFF<br>YOUR FIRST DETAIL</div>
+        <div class="crim-offer-detail">Tell us you saw our sign · Call or text to claim</div>
+      </div>
+
+      <div class="crim-services">
+        <div class="crim-svc">
+          <div class="crim-svc-name">Full Detail</div>
+          <div class="crim-svc-divider"></div>
+          <div class="crim-svc-price">from $150</div>
+        </div>
+        <div class="crim-svc">
+          <div class="crim-svc-name">Ceramic Coating</div>
+          <div class="crim-svc-divider"></div>
+          <div class="crim-svc-price">from $299</div>
+        </div>
+        <div class="crim-svc">
+          <div class="crim-svc-name">Monthly Plans</div>
+          <div class="crim-svc-divider"></div>
+          <div class="crim-svc-price">from $99/mo</div>
+        </div>
+      </div>
+
+      <div class="crim-phone">
+        <div class="crim-phone-lbl">Call or Text · Same-Week Appointments</div>
+        <div class="crim-phone-num">(508) 273-6150</div>
+      </div>
+
+      <div class="crim-footer">
+        <div class="crim-footer-txt">SE Massachusetts</div>
+        <div class="crim-footer-txt">checkmatemobiledetailing.com</div>
+        <div class="crim-footer-txt">⭐⭐⭐⭐⭐</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRINT NOTES -->
+  <div class="print-notes">
+    <h3>PRINT SHOP SPECS</h3>
+    <ul>
+      <li><strong>Size:</strong> 18" wide × 24" tall — standard yard sign / coroplast sign</li>
+      <li><strong>Material:</strong> 4mm Coroplast (corrugated plastic) with H-wire stake — fully weatherproof</li>
+      <li><strong>Resolution:</strong> 300 DPI → 5400 × 7200 px print file</li>
+      <li><strong>Finish:</strong> UV gloss or matte — both work well outdoors</li>
+      <li><strong>Cost estimate:</strong> ~$10–20 per sign at a local sign shop; $8–15 each for 10+ at GotPrint, VistaPrint, or Signs.com</li>
+      <li><strong>Strategy:</strong> After every job, ask the client if you can leave a yard sign for a week. Offer them a small discount on their next detail in exchange. One sign placed = whole street exposed for 7+ days.</li>
+      <li><strong>Version 1 (Dark):</strong> Better for neighborhoods — "we're here" presence sign. Bold contrast reads fast from a car.</li>
+      <li><strong>Version 2 (Crimson):</strong> Better as an offer sign — $25 off hook drives call-to-action. Great for high-traffic areas.</li>
+      <li><strong>To export:</strong> Chrome → Print → Save as PDF → Custom 18" × 24". Print each version separately.</li>
+    </ul>
+  </div>
+
+<script>
+  new QRCode(document.getElementById('qr-dark'), {
+    text: 'https://checkmatemobiledetailing.com',
+    width: 72,
+    height: 72,
+    colorDark: '#000000',
+    colorLight: '#ffffff',
+    correctLevel: QRCode.CorrectLevel.M
+  });
+</script>
+
+</body>
+</html>

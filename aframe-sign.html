@@ -719,12 +719,24 @@
       <li><strong>Material:</strong> Coroplast (corrugated plastic) or foam core — weather resistant for outdoor use</li>
       <li><strong>Finish:</strong> Matte laminate preferred (no glare for passersby to read)</li>
       <li><strong>Bleed:</strong> Add 0.125" bleed on all edges if your print shop requires it</li>
-      <li><strong>QR Code:</strong> Replace the placeholder QR with a real one generated at <strong>qr.io</strong> or <strong>qrcode-monkey.com</strong> pointing to checkmatemobiledetailing.com</li>
+      <li><strong>QR Code:</strong> Auto-generated live from <strong>checkmatemobiledetailing.com</strong> — open this file in Chrome before printing to ensure it renders</li>
       <li><strong>To export:</strong> Open this file in Chrome → File → Print → "Save as PDF" → set paper to custom 24" × 36"</li>
       <li><strong>Print shops:</strong> Staples, FedEx Office, or a local sign shop (search "coroplast sign printing near me")</li>
       <li><strong>Cost estimate:</strong> ~$25–60 per side at a local sign shop; order 2 panels (front + back)</li>
     </ul>
   </div>
 
+
+<script>
+  // Generate real QR code pointing to CheckMate website
+  new QRCode(document.getElementById('qr-code-front'), {
+    text: 'https://checkmatemobiledetailing.com',
+    width: 64,
+    height: 64,
+    colorDark: '#000000',
+    colorLight: '#ffffff',
+    correctLevel: QRCode.CorrectLevel.M
+  });
+</script>
 </body>
 </html>
