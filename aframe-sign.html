@@ -4,548 +4,188 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CheckMate A-Frame Sign — 24" × 36" Print Ready</title>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,400;0,600;0,700;0,900;1,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,700&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
   <style>
-    /* ─── PAGE SHELL ─────────────────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+    :root {
+      --crimson: #8B1A1A;
+      --crimson-light: #b02222;
+      --ink: #0a0a0a;
+      --ink-2: #121212;
+      --silver: #9aa3ad;
+      --chrome: linear-gradient(180deg,#f6f8f9 0%,#d3dade 38%,#9aa3ad 52%,#e2e7ea 100%);
+    }
+
     body {
-      background: #111;
+      background: #161616;
       font-family: 'Barlow', sans-serif;
       display: flex;
       flex-direction: column;
       align-items: center;
       padding: 48px 24px 80px;
-      gap: 64px;
+      gap: 60px;
       min-height: 100vh;
     }
 
-    .page-header {
-      text-align: center;
-      color: #555;
-      font-size: 13px;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-    }
+    .page-header { text-align: center; color: #555; font-size: 13px; letter-spacing: 3px; text-transform: uppercase; }
     .page-header strong { color: #f2f2f0; font-size: 16px; display: block; margin-bottom: 6px; letter-spacing: 4px; }
+    .side-label { color: #555; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; text-align: center; margin-bottom: -48px; }
 
-    .side-label {
-      color: #555;
-      font-size: 11px;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      text-align: center;
-      margin-bottom: -52px;
-    }
-
-    /* ─── SIGN WRAPPER ───────────────────────────────────────── */
-    /*
-      Physical: 24in wide × 36in tall  (2ft × 3ft)
-      At 300 DPI print: 7200 × 10800 px
-      Screen preview: 480 × 720 px  (20px per inch, 1/15th scale)
-      To export: print this page to PDF at "actual size", then send to print shop
-      requesting 24" × 36" output at 300 DPI.
-    */
+    /* Physical 24"×36" — preview 480×720 (20px/in) */
     .sign {
       width: 480px;
       height: 720px;
       position: relative;
       overflow: hidden;
-      box-shadow: 0 30px 80px rgba(0,0,0,0.8), 0 0 0 1px #333;
+      box-shadow: 0 30px 90px rgba(0,0,0,0.85), 0 0 0 1px #2a2a2a;
     }
 
-    /* ════════════════════════════════════════════════════════
-       FRONT PANEL
-    ════════════════════════════════════════════════════════ */
+    /* Checkerboard strip */
+    .checker {
+      width: 100%;
+      height: 16px;
+      flex-shrink: 0;
+      background:
+        conic-gradient(var(--crimson) 90deg, #1a1a1a 90deg 180deg, var(--crimson) 180deg 270deg, #1a1a1a 270deg);
+      background-size: 16px 16px;
+    }
+
+    /* ════ FRONT ════ */
     .sign-front {
-      width: 100%;
-      height: 100%;
-      background: #0a0a0a;
+      width: 100%; height: 100%;
+      background:
+        radial-gradient(ellipse 120% 80% at 50% 0%, #1c1c1c 0%, var(--ink) 60%);
       display: flex;
       flex-direction: column;
       align-items: center;
     }
 
-    /* Top crimson header band */
-    .sign-header {
-      width: 100%;
-      background: #8B1A1A;
-      padding: 20px 32px 18px;
-      text-align: center;
-      position: relative;
-    }
-    .sign-header::after {
-      content: '';
-      position: absolute;
-      bottom: -12px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 0;
-      height: 0;
-      border-left: 24px solid transparent;
-      border-right: 24px solid transparent;
-      border-top: 14px solid #8B1A1A;
-      z-index: 2;
+    .front-inner {
+      flex: 1; width: 100%;
+      display: flex; flex-direction: column; align-items: center;
+      padding: 26px 38px 0;
     }
 
-    .eyebrow {
-      font-family: 'Barlow', sans-serif;
-      font-weight: 700;
-      font-size: 10px;
-      letter-spacing: 4px;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.65);
-    }
-    .brand-name {
+    .logo-crest { width: 230px; height: auto; filter: drop-shadow(0 8px 24px rgba(139,26,26,0.45)); margin-bottom: 16px; }
+
+    .tagline {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: 74px;
-      line-height: 0.85;
-      color: #fff;
-      letter-spacing: 4px;
-      text-shadow: 0 2px 12px rgba(0,0,0,0.5);
-    }
-    .brand-sub {
-      font-family: 'Barlow', sans-serif;
-      font-weight: 600;
-      font-size: 11px;
-      letter-spacing: 6px;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.55);
-      margin-top: 4px;
-    }
-
-    /* Body content */
-    .sign-body {
-      flex: 1;
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 28px 32px 0;
-      gap: 0;
-    }
-
-    /* Chess knight SVG */
-    .knight-icon {
-      width: 72px;
-      height: 72px;
-      margin-bottom: 12px;
-      filter: drop-shadow(0 0 16px rgba(139,26,26,0.6));
-    }
-
-    /* Hook headline */
-    .hook {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 34px;
-      color: #f2f2f0;
+      font-size: 44px;
       letter-spacing: 2px;
+      line-height: 0.95;
       text-align: center;
-      line-height: 1.05;
       margin-bottom: 4px;
     }
-    .hook em {
-      color: #c0392b;
-      font-style: normal;
+    .tagline .dim { color: #5a5a58; }
+    .tagline .chrome {
+      background: var(--chrome);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
     }
-    .hook-sub {
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: #555;
-      text-align: center;
-      margin-bottom: 18px;
+    .tagline .arrow { color: var(--crimson-light); }
+
+    .subline {
+      font-size: 11px; font-weight: 700; letter-spacing: 4px; text-transform: uppercase;
+      color: var(--silver); text-align: center; margin-bottom: 22px;
     }
 
-    /* Divider */
-    .divider {
+    .rule { width: 100%; height: 2px; background: linear-gradient(90deg,transparent,var(--crimson),transparent); margin-bottom: 20px; }
+
+    /* Service menu */
+    .menu { width: 100%; display: flex; flex-direction: column; gap: 11px; margin-bottom: 18px; }
+    .menu-row { display: flex; align-items: baseline; gap: 10px; }
+    .menu-name { font-family: 'Bebas Neue', sans-serif; font-size: 25px; color: #f2f2f0; letter-spacing: 1.5px; white-space: nowrap; }
+    .menu-dots { flex: 1; border-bottom: 2px dotted #333; transform: translateY(-4px); }
+    .menu-price { font-family: 'Bebas Neue', sans-serif; font-size: 25px; letter-spacing: 1px; color: var(--crimson-light); white-space: nowrap; }
+    .menu-price small { font-size: 13px; color: #6a6a68; font-family: 'Barlow'; font-weight: 700; }
+
+    /* Ceramic anchor */
+    .anchor {
       width: 100%;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 18px;
-    }
-    .divider-line { flex: 1; height: 1px; background: #222; }
-    .divider-dot { width: 6px; height: 6px; border-radius: 50%; background: #8B1A1A; flex-shrink: 0; }
-
-    /* Services list */
-    .services {
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      gap: 7px;
-      margin-bottom: 20px;
-    }
-    .service-item {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: #c8c8c4;
-    }
-    .service-item::before {
-      content: '♟';
-      color: #8B1A1A;
-      font-size: 11px;
-      flex-shrink: 0;
-    }
-
-    /* Phone number — BIG */
-    .phone-block {
-      width: 100%;
-      background: #8B1A1A;
-      border-radius: 4px;
-      padding: 14px 20px 12px;
-      text-align: center;
-      margin-bottom: 14px;
-    }
-    .phone-label {
-      font-size: 9px;
-      font-weight: 700;
-      letter-spacing: 4px;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.5);
-      margin-bottom: 2px;
-    }
-    .phone-number {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 52px;
-      color: #fff;
-      letter-spacing: 4px;
-      line-height: 1;
-      text-shadow: 0 2px 8px rgba(0,0,0,0.4);
-    }
-
-    /* QR + URL row */
-    .qr-row {
-      width: 100%;
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      margin-bottom: 0;
-    }
-    .qr-box {
-      width: 72px;
-      height: 72px;
-      background: #fff;
-      border-radius: 4px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      position: relative;
-      overflow: hidden;
-    }
-    /* Fake QR pattern */
-    .qr-box svg { width: 64px; height: 64px; }
-
-    .qr-info {
-      display: flex;
-      flex-direction: column;
-      gap: 3px;
-    }
-    .qr-cta {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 22px;
-      color: #f2f2f0;
-      letter-spacing: 2px;
-      line-height: 1;
-    }
-    .qr-url {
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: 2px;
-      color: #555;
-      text-transform: lowercase;
-    }
-
-    /* Stars */
-    .stars-row {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      margin-top: auto;
-      padding-top: 14px;
-      padding-bottom: 16px;
-    }
-    .stars {
-      color: #FFB800;
-      font-size: 14px;
-      letter-spacing: 2px;
-    }
-    .stars-text {
-      font-size: 9px;
-      font-weight: 700;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: #444;
-    }
-
-    /* Bottom bar */
-    .sign-footer {
-      width: 100%;
-      background: #8B1A1A;
-      padding: 9px 32px 8px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .footer-text {
-      font-family: 'Barlow', sans-serif;
-      font-weight: 700;
-      font-size: 9px;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.5);
-    }
-    .footer-badge {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 14px;
-      color: rgba(255,255,255,0.9);
-      letter-spacing: 2px;
-    }
-
-    /* ════════════════════════════════════════════════════════
-       BACK PANEL
-    ════════════════════════════════════════════════════════ */
-    .sign-back {
-      width: 100%;
-      height: 100%;
-      background: #8B1A1A;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    /* Diagonal texture lines */
-    .sign-back::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: repeating-linear-gradient(
-        -45deg,
-        transparent,
-        transparent 20px,
-        rgba(0,0,0,0.08) 20px,
-        rgba(0,0,0,0.08) 22px
-      );
-      pointer-events: none;
-    }
-
-    .back-inner {
-      position: relative;
-      z-index: 1;
-      width: 100%;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 36px 36px 0;
-    }
-
-    .back-eyebrow {
-      font-family: 'Barlow', sans-serif;
-      font-weight: 700;
-      font-size: 9px;
-      letter-spacing: 5px;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.45);
-      margin-bottom: 8px;
-    }
-
-    .back-headline {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 58px;
-      color: #fff;
-      letter-spacing: 3px;
-      text-align: center;
-      line-height: 0.9;
-      text-shadow: 0 4px 20px rgba(0,0,0,0.3);
-      margin-bottom: 6px;
-    }
-
-    .back-tagline {
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: 4px;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.5);
-      text-align: center;
-      margin-bottom: 24px;
-    }
-
-    /* Offer card */
-    .offer-card {
-      width: 100%;
-      background: rgba(0,0,0,0.25);
-      border: 1px solid rgba(255,255,255,0.1);
+      background: linear-gradient(135deg, #1a1a1a, #242424);
+      border: 1px solid rgba(176,34,34,0.4);
       border-radius: 6px;
-      padding: 20px 24px;
-      text-align: center;
+      padding: 12px 18px;
+      display: flex; align-items: center; justify-content: space-between;
       margin-bottom: 20px;
     }
-    .offer-tag {
-      display: inline-block;
-      background: #fff;
-      color: #8B1A1A;
-      font-family: 'Barlow', sans-serif;
-      font-weight: 900;
-      font-size: 9px;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      padding: 3px 10px;
-      border-radius: 2px;
-      margin-bottom: 10px;
-    }
-    .offer-headline {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 40px;
-      color: #fff;
-      letter-spacing: 2px;
-      line-height: 1;
-      margin-bottom: 4px;
-    }
-    .offer-detail {
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.5);
-    }
+    .anchor-left { display: flex; flex-direction: column; }
+    .anchor-tag { font-size: 8px; font-weight: 900; letter-spacing: 3px; text-transform: uppercase; color: var(--crimson-light); margin-bottom: 2px; }
+    .anchor-name { font-family: 'Bebas Neue', sans-serif; font-size: 22px; color: #fff; letter-spacing: 1px; line-height: 1; }
+    .anchor-desc { font-size: 8px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: #6a6a68; margin-top: 2px; }
+    .anchor-price { font-family: 'Bebas Neue', sans-serif; font-size: 38px; color: #fff; letter-spacing: 1px; line-height: 1; }
 
-    /* Back services */
-    .back-services {
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      margin-bottom: 24px;
+    /* Phone */
+    .phone {
+      width: 100%; background: var(--crimson); border-radius: 6px;
+      padding: 16px 20px 13px; text-align: center; margin-bottom: 18px;
+      box-shadow: 0 8px 24px rgba(139,26,26,0.4);
     }
-    .back-service {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-    .back-service-icon {
-      width: 28px;
-      height: 28px;
-      background: rgba(255,255,255,0.1);
-      border-radius: 3px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 13px;
-      flex-shrink: 0;
-    }
-    .back-service-text {
-      flex: 1;
-    }
-    .back-service-name {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 18px;
-      color: #fff;
-      letter-spacing: 2px;
-      line-height: 1;
-    }
-    .back-service-desc {
-      font-size: 9px;
-      font-weight: 600;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.4);
-    }
-    .back-service-price {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 20px;
-      color: rgba(255,255,255,0.8);
-      letter-spacing: 1px;
-    }
+    .phone-lbl { font-size: 9px; font-weight: 800; letter-spacing: 5px; text-transform: uppercase; color: rgba(255,255,255,0.6); margin-bottom: 2px; }
+    .phone-num { font-family: 'Bebas Neue', sans-serif; font-size: 58px; color: #fff; letter-spacing: 4px; line-height: 1; text-shadow: 0 2px 10px rgba(0,0,0,0.4); }
 
-    /* Back phone */
-    .back-phone-block {
-      width: 100%;
-      background: rgba(0,0,0,0.3);
-      border-radius: 4px;
-      padding: 16px 20px 14px;
-      text-align: center;
-      margin-top: auto;
-      margin-bottom: 0;
-    }
-    .back-phone-label {
-      font-size: 9px;
-      font-weight: 700;
-      letter-spacing: 4px;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.4);
-      margin-bottom: 2px;
-    }
-    .back-phone-number {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 48px;
-      color: #fff;
-      letter-spacing: 4px;
-      line-height: 1;
-    }
+    /* QR row */
+    .qr-row { width: 100%; display: flex; align-items: center; gap: 16px; margin-top: auto; padding-bottom: 18px; }
+    .qr-box { width: 80px; height: 80px; background: #fff; border-radius: 6px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; overflow: hidden; padding: 4px; }
+    .qr-info { flex: 1; }
+    .qr-cta { font-family: 'Bebas Neue', sans-serif; font-size: 26px; color: #f2f2f0; letter-spacing: 1.5px; line-height: 1; margin-bottom: 4px; }
+    .qr-url { font-size: 11px; font-weight: 700; letter-spacing: 1.5px; color: var(--silver); }
+    .qr-badge { display: inline-block; margin-top: 6px; font-size: 9px; font-weight: 900; letter-spacing: 2px; text-transform: uppercase; color: var(--crimson-light); }
 
-    .back-footer {
-      width: 100%;
-      background: rgba(0,0,0,0.3);
-      padding: 10px 32px 9px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-top: 14px;
-    }
-    .back-footer-text {
-      font-size: 9px;
-      font-weight: 700;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.35);
-    }
-    .back-footer-ig {
-      font-size: 9px;
-      font-weight: 700;
-      letter-spacing: 2px;
-      text-transform: lowercase;
-      color: rgba(255,255,255,0.5);
-    }
+    /* Footer */
+    .foot { width: 100%; background: var(--ink-2); padding: 10px 38px 9px; display: flex; align-items: center; justify-content: space-between; }
+    .foot-txt { font-size: 9px; font-weight: 800; letter-spacing: 2.5px; text-transform: uppercase; color: var(--silver); }
+    .foot-txt.muted { color: #555; }
 
-    /* ─── PRINT NOTES ─────────────────────────────────────── */
-    .print-notes {
-      max-width: 520px;
-      padding: 24px;
-      border: 1px solid #222;
-      border-radius: 8px;
-      color: #555;
+    /* ════ BACK ════ */
+    .sign-back {
+      width: 100%; height: 100%;
+      background:
+        radial-gradient(ellipse 120% 80% at 50% 0%, #a02222 0%, var(--crimson) 55%, #6e1414 100%);
+      display: flex; flex-direction: column; align-items: center;
+      position: relative; overflow: hidden;
     }
-    .print-notes h3 {
-      color: #8B1A1A;
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 20px;
-      letter-spacing: 2px;
-      margin-bottom: 12px;
+    .back-inner { flex: 1; width: 100%; display: flex; flex-direction: column; align-items: center; padding: 30px 38px 0; position: relative; z-index: 1; }
+
+    .logo-plate { background: rgba(0,0,0,0.32); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 14px 26px; margin-bottom: 18px; }
+    .logo-crest-back { width: 200px; height: auto; display: block; filter: drop-shadow(0 6px 16px rgba(0,0,0,0.5)); }
+
+    .back-head {
+      font-family: 'Bebas Neue', sans-serif; font-size: 62px; color: #fff;
+      letter-spacing: 2px; text-align: center; line-height: 0.9;
+      text-shadow: 0 4px 20px rgba(0,0,0,0.3); margin-bottom: 6px;
     }
-    .print-notes ul {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
+    .back-sub { font-size: 11px; font-weight: 700; letter-spacing: 4px; text-transform: uppercase; color: rgba(255,255,255,0.6); text-align: center; margin-bottom: 24px; }
+
+    .offer {
+      width: 100%; background: rgba(0,0,0,0.28); border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 8px; padding: 22px 24px; text-align: center; margin-bottom: 22px;
     }
-    .print-notes li {
-      font-size: 13px;
-      line-height: 1.5;
-      display: flex;
-      gap: 8px;
-    }
-    .print-notes li::before { content: '→'; color: #8B1A1A; flex-shrink: 0; }
-    .print-notes li strong { color: #f2f2f0; }
+    .offer-tag { display: inline-block; background: #fff; color: var(--crimson); font-weight: 900; font-size: 9px; letter-spacing: 3px; text-transform: uppercase; padding: 4px 12px; border-radius: 3px; margin-bottom: 10px; }
+    .offer-head { font-family: 'Bebas Neue', sans-serif; font-size: 46px; color: #fff; letter-spacing: 2px; line-height: 0.95; margin-bottom: 6px; }
+    .offer-head .big { color: #fff; }
+    .offer-detail { font-size: 10px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.6); }
+
+    .why { width: 100%; display: flex; flex-direction: column; gap: 13px; margin-bottom: 24px; }
+    .why-row { display: flex; align-items: center; gap: 12px; }
+    .why-check { width: 26px; height: 26px; flex-shrink: 0; background: rgba(255,255,255,0.12); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 13px; font-weight: 900; }
+    .why-txt { font-family: 'Bebas Neue', sans-serif; font-size: 22px; color: #fff; letter-spacing: 1.5px; line-height: 1; }
+
+    .back-phone { width: 100%; background: rgba(0,0,0,0.32); border-radius: 6px; padding: 16px 20px 13px; text-align: center; margin-top: auto; }
+    .back-phone-lbl { font-size: 9px; font-weight: 800; letter-spacing: 5px; text-transform: uppercase; color: rgba(255,255,255,0.55); margin-bottom: 2px; }
+    .back-phone-num { font-family: 'Bebas Neue', sans-serif; font-size: 56px; color: #fff; letter-spacing: 4px; line-height: 1; }
+
+    .back-foot { width: 100%; background: rgba(0,0,0,0.32); padding: 10px 38px 9px; display: flex; align-items: center; justify-content: space-between; margin-bottom: 0; }
+    .back-foot-txt { font-size: 9px; font-weight: 800; letter-spacing: 2.5px; text-transform: uppercase; color: rgba(255,255,255,0.55); }
+
+    /* Print notes */
+    .print-notes { max-width: 540px; padding: 24px; border: 1px solid #2a2a2a; border-radius: 8px; color: #666; }
+    .print-notes h3 { color: var(--crimson-light); font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: 2px; margin-bottom: 12px; }
+    .print-notes ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .print-notes li { font-size: 13px; line-height: 1.5; display: flex; gap: 8px; }
+    .print-notes li::before { content: '→'; color: var(--crimson-light); flex-shrink: 0; }
+    .print-notes li strong { color: #e8e8e8; }
 
     @media print {
       body { background: white; padding: 0; gap: 0; }
@@ -561,180 +201,108 @@
     A-Frame Sign — 24″ × 36″ (2 ft × 3 ft) — Both Sides
   </div>
 
-  <!-- ═══ FRONT PANEL ═══════════════════════════════════════ -->
-  <div class="side-label">◀ FRONT — Dark / Bold / Neighborhood Hook ▶</div>
-
+  <!-- FRONT -->
+  <div class="side-label">◀ FRONT — Logo · Service Menu · Phone ▶</div>
   <div class="sign sign-front">
+    <div class="checker"></div>
+    <div class="front-inner">
+      <img class="logo-crest" src="assets/logo.png" alt="CheckMate Mobile Detailing">
 
-    <!-- Red header bar -->
-    <div class="sign-header">
-      <div class="eyebrow">Mobile Detailing · SE Massachusetts</div>
-      <div class="brand-name">CHECKMATE</div>
-      <div class="brand-sub">Mobile Detailing</div>
-    </div>
+      <div class="tagline"><span class="dim">DIRTY CAR</span> <span class="arrow">→</span> <span class="chrome">SPOTLESS</span></div>
+      <div class="subline">Professional Mobile Detailing · We Come To You</div>
 
-    <!-- Body -->
-    <div class="sign-body">
+      <div class="rule"></div>
 
-      <!-- Knight icon -->
-      <svg class="knight-icon" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="50" cy="50" r="48" fill="#8B1A1A" opacity="0.15"/>
-        <circle cx="50" cy="50" r="42" fill="none" stroke="#8B1A1A" stroke-width="1.5" opacity="0.4"/>
-        <!-- Chess knight simplified -->
-        <path d="M32 75 L32 68 Q28 65 27 58 Q26 50 30 44 Q32 38 38 33 Q42 29 45 26 Q47 22 50 20 Q54 18 57 20 Q60 22 60 26 Q62 28 65 26 Q67 26 67 29 Q65 32 62 32 Q65 36 64 40 Q68 44 68 52 Q68 62 64 67 L68 68 L68 75 Z"
-          fill="#8B1A1A" stroke="#b02222" stroke-width="1.5" stroke-linejoin="round"/>
-        <ellipse cx="50" cy="76" rx="20" ry="3" fill="#8B1A1A" opacity="0.4"/>
-        <!-- eye -->
-        <circle cx="56" cy="28" r="2.5" fill="#fff" opacity="0.8"/>
-      </svg>
-
-      <!-- Headline hook -->
-      <div class="hook">WE'RE DETAILING<br>YOUR <em>NEIGHBORHOOD</em></div>
-      <div class="hook-sub">Ask us about same-week availability</div>
-
-      <div class="divider">
-        <div class="divider-line"></div>
-        <div class="divider-dot"></div>
-        <div class="divider-line"></div>
+      <div class="menu">
+        <div class="menu-row"><span class="menu-name">Full Detail</span><span class="menu-dots"></span><span class="menu-price"><small>from</small> $220</span></div>
+        <div class="menu-row"><span class="menu-name">Interior Detail</span><span class="menu-dots"></span><span class="menu-price"><small>from</small> $130</span></div>
+        <div class="menu-row"><span class="menu-name">Exterior Detail</span><span class="menu-dots"></span><span class="menu-price"><small>from</small> $130</span></div>
       </div>
 
-      <!-- Services -->
-      <div class="services">
-        <div class="service-item">Full Interior & Exterior Detail</div>
-        <div class="service-item">Paint Decontamination &amp; Clay Bar</div>
-        <div class="service-item">Ceramic Coating &amp; Paint Sealant</div>
-        <div class="service-item">Monthly Protection Plans</div>
+      <div class="anchor">
+        <div class="anchor-left">
+          <div class="anchor-tag">Ultimate Protection</div>
+          <div class="anchor-name">3-Year Ceramic Coating</div>
+          <div class="anchor-desc">Decon · Clay Bar · Paint Correction · Coating</div>
+        </div>
+        <div class="anchor-price">$900</div>
       </div>
 
-      <!-- Phone -->
-      <div class="phone-block">
-        <div class="phone-label">Call or Text to Book</div>
-        <div class="phone-number">(508) 273-6150</div>
+      <div class="phone">
+        <div class="phone-lbl">Call or Text to Book</div>
+        <div class="phone-num">(508) 273-6150</div>
       </div>
 
-      <!-- QR code row -->
       <div class="qr-row">
-        <div class="qr-box" id="qr-code-front"></div>
+        <div class="qr-box" id="qr-front"></div>
         <div class="qr-info">
           <div class="qr-cta">SCAN TO BOOK ONLINE</div>
           <div class="qr-url">checkmatemobiledetailing.com</div>
-          <div class="qr-url" style="color:#8B1A1A; margin-top:3px; font-size:9px; letter-spacing:3px; font-weight:700; text-transform:uppercase;">Free Estimate · No Commitment</div>
+          <span class="qr-badge">★★★★★ · Free Estimates</span>
         </div>
       </div>
-
-      <!-- Stars -->
-      <div class="stars-row">
-        <div class="stars">★★★★★</div>
-        <div class="stars-text">5-Star Rated · 3+ Years · SE Mass</div>
-      </div>
-
-    </div><!-- /sign-body -->
-
-    <!-- Bottom bar -->
-    <div class="sign-footer">
-      <div class="footer-text">Fully Mobile · We Come To You</div>
-      <div class="footer-badge">CHECKMATE ♟</div>
-      <div class="footer-text">100% Satisfaction Guaranteed</div>
     </div>
 
-  </div><!-- /sign-front -->
+    <div class="foot">
+      <div class="foot-txt">Southeast MA &amp; Cape Cod</div>
+      <div class="foot-txt muted">@checkmatemobiledetailing</div>
+    </div>
+    <div class="checker"></div>
+  </div>
 
-
-  <!-- ═══ BACK PANEL ════════════════════════════════════════ -->
-  <div class="side-label">◀ BACK — Crimson / Pricing Teaser / Referral ▶</div>
-
+  <!-- BACK -->
+  <div class="side-label">◀ BACK — Referral Offer · Why Us ▶</div>
   <div class="sign sign-back">
+    <div class="checker"></div>
     <div class="back-inner">
+      <div class="logo-plate"><img class="logo-crest-back" src="assets/logo.png" alt="CheckMate Mobile Detailing"></div>
 
-      <div class="back-eyebrow">Trusted in Your Neighborhood</div>
-      <div class="back-headline">YOUR CAR.<br>SHOWROOM<br>CLEAN.</div>
-      <div class="back-tagline">Professional mobile detailing · We come to you</div>
+      <div class="back-head">YOUR CAR.<br>SHOWROOM CLEAN.</div>
+      <div class="back-sub">We bring the shop to your driveway</div>
 
-      <!-- Referral offer card -->
-      <div class="offer-card">
-        <div class="offer-tag">Neighbor Offer</div>
-        <div class="offer-headline">$25 OFF YOUR FIRST DETAIL</div>
-        <div class="offer-detail">Tell us you saw our sign · Call or text to claim</div>
+      <div class="offer">
+        <div class="offer-tag">Referral Reward</div>
+        <div class="offer-head">REFER A FRIEND —<br>YOU BOTH GET <span class="big">$20 OFF</span></div>
+        <div class="offer-detail">Just have them mention your name when they book</div>
       </div>
 
-      <!-- Services with pricing -->
-      <div class="back-services">
-        <div class="back-service">
-          <div class="back-service-icon">🧼</div>
-          <div class="back-service-text">
-            <div class="back-service-name">Exterior Wash & Wax</div>
-            <div class="back-service-desc">Hand wash · tire dressing · windows</div>
-          </div>
-          <div class="back-service-price">from $80</div>
-        </div>
-        <div class="back-service">
-          <div class="back-service-icon">✨</div>
-          <div class="back-service-text">
-            <div class="back-service-name">Full Interior Detail</div>
-            <div class="back-service-desc">Vacuum · shampoo · leather conditioning</div>
-          </div>
-          <div class="back-service-price">from $120</div>
-        </div>
-        <div class="back-service">
-          <div class="back-service-icon">🛡</div>
-          <div class="back-service-text">
-            <div class="back-service-name">Ceramic Coating</div>
-            <div class="back-service-desc">Long-term paint protection · gloss boost</div>
-          </div>
-          <div class="back-service-price">from $299</div>
-        </div>
-        <div class="back-service">
-          <div class="back-service-icon">📅</div>
-          <div class="back-service-text">
-            <div class="back-service-name">Monthly Plans</div>
-            <div class="back-service-desc">Keep your car clean year-round · best value</div>
-          </div>
-          <div class="back-service-price">from $99/mo</div>
-        </div>
+      <div class="why">
+        <div class="why-row"><div class="why-check">✓</div><div class="why-txt">100% Mobile — We Come To You</div></div>
+        <div class="why-row"><div class="why-check">✓</div><div class="why-txt">Cars, Trucks &amp; SUVs</div></div>
+        <div class="why-row"><div class="why-check">✓</div><div class="why-txt">Free Estimates · 5-Star Rated</div></div>
       </div>
 
-      <!-- Phone -->
-      <div class="back-phone-block">
-        <div class="back-phone-label">Call or Text · Same-Week Appointments</div>
-        <div class="back-phone-number">(508) 273-6150</div>
+      <div class="back-phone">
+        <div class="back-phone-lbl">Call or Text · Same-Week Booking</div>
+        <div class="back-phone-num">(508) 273-6150</div>
       </div>
 
-      <!-- Footer -->
-      <div class="back-footer">
-        <div class="back-footer-text">SE Massachusetts</div>
-        <div class="back-footer-ig">@checkmatemobiledetailing</div>
-        <div class="back-footer-text">Fully Insured</div>
+      <div class="back-foot">
+        <div class="back-foot-txt">Southeast MA &amp; Cape Cod</div>
+        <div class="back-foot-txt">checkmatemobiledetailing.com</div>
       </div>
-
     </div>
-  </div><!-- /sign-back -->
+    <div class="checker"></div>
+  </div>
 
-
-  <!-- ═══ PRINT NOTES ════════════════════════════════════════ -->
+  <!-- PRINT NOTES -->
   <div class="print-notes">
     <h3>PRINT SHOP SPECS</h3>
     <ul>
       <li><strong>Size:</strong> 24" wide × 36" tall (2 ft × 3 ft) — standard A-frame insert</li>
-      <li><strong>Resolution:</strong> 300 DPI minimum for crisp edges on the Bebas Neue type</li>
-      <li><strong>Material:</strong> Coroplast (corrugated plastic) or foam core — weather resistant for outdoor use</li>
-      <li><strong>Finish:</strong> Matte laminate preferred (no glare for passersby to read)</li>
-      <li><strong>Bleed:</strong> Add 0.125" bleed on all edges if your print shop requires it</li>
-      <li><strong>QR Code:</strong> Auto-generated live from <strong>checkmatemobiledetailing.com</strong> — open this file in Chrome before printing to ensure it renders</li>
-      <li><strong>To export:</strong> Open this file in Chrome → File → Print → "Save as PDF" → set paper to custom 24" × 36"</li>
-      <li><strong>Print shops:</strong> Staples, FedEx Office, or a local sign shop (search "coroplast sign printing near me")</li>
-      <li><strong>Cost estimate:</strong> ~$25–60 per side at a local sign shop; order 2 panels (front + back)</li>
+      <li><strong>Resolution:</strong> 300 DPI for crisp Bebas Neue type</li>
+      <li><strong>Material:</strong> Coroplast or foam core — weatherproof</li>
+      <li><strong>Finish:</strong> Matte laminate (no glare)</li>
+      <li><strong>QR Code:</strong> Auto-generated from checkmatemobiledetailing.com — open in Chrome before printing</li>
+      <li><strong>Export:</strong> Chrome → Print → Save as PDF → Custom 24" × 36"</li>
+      <li><strong>Cost:</strong> ~$25–60 per side at a local sign shop; order both panels</li>
     </ul>
   </div>
 
-
 <script>
-  // Generate real QR code pointing to CheckMate website
-  new QRCode(document.getElementById('qr-code-front'), {
+  new QRCode(document.getElementById('qr-front'), {
     text: 'https://checkmatemobiledetailing.com',
-    width: 64,
-    height: 64,
-    colorDark: '#000000',
-    colorLight: '#ffffff',
+    width: 72, height: 72, colorDark: '#0a0a0a', colorLight: '#ffffff',
     correctLevel: QRCode.CorrectLevel.M
   });
 </script>
