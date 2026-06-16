@@ -85,7 +85,7 @@ Tap the link in bio to see what's included ↗
 ```
 Your car looks clean. Your friend's doesn't. Fix that. 😂
 
-Refer a friend to CheckMate and you BOTH get $25 off your next detail. 
+Refer a friend to CheckMate and you BOTH get $20 off your next detail. 
 No codes. No apps. Just text us their name and we'll handle the rest.
 
 That's free money for doing literally nothing.
@@ -217,4 +217,4 @@ CheckMate Mobile Detailing · SE Massachusetts
 #DetailShot #AutoCare #CarLovers #DailyDriven
 
 **Brand:**
-#CheckmateMobileDetailing #Checkmate #MobileDetail #WeComeTo You
+#CheckmateMobileDetailing #Checkmate #MobileDetail #WeComeToYou

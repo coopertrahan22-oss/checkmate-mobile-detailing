@@ -14,7 +14,7 @@ to a small business like mine 🙏
 → [YOUR GOOGLE REVIEW LINK]
 
 And if you know anyone who needs a detail, send them my way — 
-you'll both get $25 off your next service. Just have them 
+you'll both get $20 off your next service. Just have them 
 mention your name when they book.
 
 — Cooper, CheckMate Mobile Detailing
@@ -30,7 +30,7 @@ mention your name when they book.
 Hey [NAME]! Hope the [CAR] is still looking clean 😄
 
 Quick reminder — if you refer a friend to CheckMate, 
-you BOTH get $25 off your next detail. 
+you BOTH get $20 off your next detail. 
 Just have them text me your name when they book.
 
 (508) 273-6150
